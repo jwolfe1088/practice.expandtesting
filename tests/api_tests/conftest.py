@@ -7,5 +7,5 @@ def api_client():
 
 @pytest.fixture()
 def auth_token(api_client, email, password):
-    token = api_client.login(email, password)
+    token = api_client.user_login(email, password)
     return token["token"]
