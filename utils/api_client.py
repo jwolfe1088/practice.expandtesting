@@ -13,7 +13,6 @@ class APIClient:
         return requests.post(f"{BASE_URL}/users/login", json={"email": email, "password": password})
 
 
-
     def user_register(self, name, email, password):
         return requests.post(f"{BASE_URL}/users/register", json={"name": name, "email": email, "password": password})
 
@@ -44,8 +43,8 @@ class APIClient:
 
 
 
-    def update_status_of_note(self, note_id, status, auth_token):
-        return requests.patch(f"{BASE_URL}/notes/{note_id}", json={"status": status}, headers=self._get_headers(auth_token))
+    def update_status_of_note(self, note_id, completed, auth_token):
+        return requests.patch(f"{BASE_URL}/notes/{note_id}", json={"status": completed}, headers=self._get_headers(auth_token))
 
 
 
