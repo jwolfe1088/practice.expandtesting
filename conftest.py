@@ -9,6 +9,10 @@ def base_url():
     return "https://practice.expandtesting.com/notes/app"
 
 @pytest.fixture(scope="session")
+def api_base_url():
+    return "https://practice.expandtesting.com/notes/api"
+
+@pytest.fixture(scope="session")
 def email():
     return os.getenv("EMAIL")
 
