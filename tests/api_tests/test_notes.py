@@ -14,12 +14,16 @@ def test_get_note_by_id(api_client, auth_token):
     response = api_client.get_note_by_id(note_id, auth_token)
     assert response.status_code == 200
 
-def test_update_status_of_note(api_client, auth_token):
-    completed = True
+def test_update_note(api_client, auth_token):
     create_note = api_client.create_new_note("Note", "test note", "Home", auth_token)
     note_id = create_note.json()["data"]["id"]
-    response = api_client.update_status_of_note(note_id, completed, auth_token)
-    print(response.json())
+    response = api_client.update_note(note_id, "Note", "test note", True, "Home", auth_token)
+    assert response.status_code == 200
+
+def test_update_status_of_note(api_client, auth_token):
+    create_note = api_client.create_new_note("Note", "test note", "Home", auth_token)
+    note_id = create_note.json()["data"]["id"]
+    response = api_client.update_status_of_note(note_id, True, auth_token)
     assert response.status_code == 200
 
 def test_delete_note(api_client, auth_token):

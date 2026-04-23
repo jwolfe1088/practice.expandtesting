@@ -38,13 +38,13 @@ class APIClient:
 
 
 
-    def update_note(self, note_id, title, description, status, category, auth_token):
-        return requests.put(f"{BASE_URL}/notes/{note_id}", json={"title": title, "description": description, "status": status, "category": category}, headers=self._get_headers(auth_token))
+    def update_note(self, note_id, title, description, completed, category, auth_token):
+        return requests.put(f"{BASE_URL}/notes/{note_id}", json={"title": title, "description": description, "completed": completed, "category": category}, headers=self._get_headers(auth_token))
 
 
 
     def update_status_of_note(self, note_id, completed, auth_token):
-        return requests.patch(f"{BASE_URL}/notes/{note_id}", json={"status": completed}, headers=self._get_headers(auth_token))
+        return requests.patch(f"{BASE_URL}/notes/{note_id}", json={"completed": completed,}, headers=self._get_headers(auth_token))
 
 
 
