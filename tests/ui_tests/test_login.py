@@ -1,6 +1,3 @@
-import pytest
-from pages.login_page import LoginPage
-
 BASE_URL = "https://practice.expandtesting.com/notes/app/login"
 
 def test_login(login_page, email, password):

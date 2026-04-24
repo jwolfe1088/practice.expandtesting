@@ -14,6 +14,9 @@ class NotesPage(BasePage):
     def click_add_note(self):
         self.page.get_by_test_id("add-new-note").click()
 
+    def select_new_note_category(self, category):
+        self.page.get_by_test_id("note-category").select_option(category)
+
     def create_new_note_title(self, title):
         self.page.get_by_test_id("note-title").fill(title)
 
@@ -23,19 +26,23 @@ class NotesPage(BasePage):
     def click_note_submit(self):
         self.page.get_by_test_id("note-submit").click()
 
+    def click_home_category(self):
+        self.page.get_by_test_id("category-home").click()
+
     def click_view_note(self):
         self.page.get_by_test_id("note-view").click()
 
     def click_edit_note(self):
         self.page.get_by_test_id("note-edit").click()
-
-    def delete_note(self):
-        self.page.get_by_test_id("note-delete").click()
-        self.page.get_by_test_id("note-delete-confirm").click()
     
+    def delete_note(self, title):
+        note_card = self.page.get_by_test_id("note-card-title").filter(has_text=title)
+        note_card.get_by_test_id("note-delete").click()
+        self.page.get_by_test_id("note-delete-confirm").click()
+
     def search_notes(self, title):
         self.page.get_by_test_id("search-input").fill(title)
         self.page.get_by_test_id("search-btn").click()
 
     def note_is_visible(self, title):
-        return self.page.get_by_text(title).is_visible()
+        return self.page.get_by_text(title).first.is_visible()

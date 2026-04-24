@@ -22,3 +22,7 @@ def login_page(page):
 def notes_page(page):
     return NotesPage(page)
     
+@pytest.fixture()
+def cleanup_note(notes_page, title):
+    yield
+    notes_page.delete_note(title)
