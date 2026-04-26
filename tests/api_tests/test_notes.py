@@ -1,28 +1,33 @@
 import requests
 
-def test_create_note(api_client, auth_token):
+def test_create_note(api_client, auth_token, cleanup_note_api):
     response = api_client.create_new_note("New Note", "Testing Note", "Home", auth_token)
+    note_id = response.json()["data"]["id"]
+    cleanup_note_api(note_id)
     assert response.status_code == 200
 
 def test_get_all_notes(api_client, auth_token):
     response = api_client.get_all_notes(auth_token)
     assert response.status_code == 200
 
-def test_get_note_by_id(api_client, auth_token):
+def test_get_note_by_id(api_client, auth_token, cleanup_note_api):
     create_note = api_client.create_new_note("Note", "test note", "Home", auth_token)
     note_id = create_note.json()["data"]["id"]
+    cleanup_note_api(note_id)
     response = api_client.get_note_by_id(note_id, auth_token)
     assert response.status_code == 200
 
-def test_update_note(api_client, auth_token):
+def test_update_note(api_client, auth_token, cleanup_note_api):
     create_note = api_client.create_new_note("Note", "test note", "Home", auth_token)
     note_id = create_note.json()["data"]["id"]
+    cleanup_note_api(note_id)
     response = api_client.update_note(note_id, "Note", "test note", True, "Home", auth_token)
     assert response.status_code == 200
 
-def test_update_status_of_note(api_client, auth_token):
+def test_update_status_of_note(api_client, auth_token, cleanup_note_api):
     create_note = api_client.create_new_note("Note", "test note", "Home", auth_token)
     note_id = create_note.json()["data"]["id"]
+    cleanup_note_api(note_id)
     response = api_client.update_status_of_note(note_id, True, auth_token)
     assert response.status_code == 200
 

@@ -8,6 +8,7 @@ def test_add_note(login_page, notes_page, email, password, cleanup_note):
     notes_page.create_new_note_title("Very first note")
     notes_page.create_new_note_description("new note for add note test")
     notes_page.click_note_submit()
+    cleanup_note("Very first note")
     notes_page.click_home_category()
     assert notes_page.note_is_visible("Very first note")
 

@@ -34,10 +34,14 @@ class NotesPage(BasePage):
 
     def click_edit_note(self):
         self.page.get_by_test_id("note-edit").click()
+
+    def click_completed_box(self):
+        self.page.get_by_test_id("toggle-note-switch").click()
     
     def delete_note(self, title):
-        note_card = self.page.get_by_test_id("note-card-title").filter(has_text=title)
-        note_card.get_by_test_id("note-delete").click()
+        self.navigate_to_notes()
+        note_card = self.page.get_by_test_id("note-card").filter(has_text=title)
+        note_card.get_by_test_id("note-delete").first.click()
         self.page.get_by_test_id("note-delete-confirm").click()
 
     def search_notes(self, title):
